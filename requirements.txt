@@ -1,0 +1,5 @@
+Django>=2.2,<3.0
+django-environ==0.4.5
+djangorestframework==3.9.4
+ipython
+mysqlclient==1.4.2.post1
