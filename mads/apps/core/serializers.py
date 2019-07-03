@@ -1,0 +1,21 @@
+from rest_framework import serializers
+
+from . import models
+
+
+class DomainSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Domain
+        fields = [
+            "domain",
+            "description",
+            "aliases",
+            "mailboxes",
+            "maxquota",
+            "quota",
+            "transport",
+            "backupmx",
+            "created",
+            "modified",
+            "active",
+        ]
