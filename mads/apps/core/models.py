@@ -33,6 +33,7 @@ class Alias(models.Model):
     class Meta:
         db_table = "alias"
         managed = False
+        verbose_name_plural = "aliases"
 
     def __str__(self):
         return self.address
@@ -52,6 +53,7 @@ class Mailbox(models.Model):
     class Meta:
         db_table = "mailbox"
         managed = False
+        verbose_name_plural = "mailboxes"
 
     def __str__(self):
         return self.username
