@@ -8,6 +8,7 @@ from mads.apps.core import views
 router = routers.DefaultRouter()
 router.register(r"domains", views.DomainViewSet)
 router.register(r"aliases", views.AliasViewSet)
+router.register(r"mailboxes", views.MailboxViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

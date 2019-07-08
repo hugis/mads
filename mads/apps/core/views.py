@@ -16,3 +16,9 @@ class AliasViewSet(viewsets.ModelViewSet):
     queryset = models.Alias.objects.all().order_by("-created")
     serializer_class = serializers.AliasSerializer
 
+
+class MailboxViewSet(viewsets.ModelViewSet):
+    """API endpoint that allows mailboxes to be viewed or edited."""
+
+    queryset = models.Mailbox.objects.all().order_by("-created")
+    serializer_class = serializers.MailboxSerializer

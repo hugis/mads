@@ -36,3 +36,22 @@ class Alias(models.Model):
 
     def __str__(self):
         return self.address
+
+
+class Mailbox(models.Model):
+    username = models.CharField(max_length=255, primary_key=True)
+    password = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, blank=True)
+    maildir = models.CharField(max_length=255)
+    quota = models.BigIntegerField(default=0)
+    domain = models.CharField(max_length=255)
+    created = models.DateTimeField(blank=True, null=True)
+    modified = models.DateTimeField(blank=True, null=True)
+    active = models.BooleanField()
+
+    class Meta:
+        db_table = "mailbox"
+        managed = False
+
+    def __str__(self):
+        return self.username

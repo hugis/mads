@@ -25,3 +25,19 @@ class AliasSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Alias
         fields = ["address", "goto", "domain", "created", "modified", "active"]
+
+
+class MailboxSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Mailbox
+        fields = [
+            "username",
+            "password",
+            "name",
+            "maildir",
+            "quota",
+            "domain",
+            "created",
+            "modified",
+            "active",
+        ]
