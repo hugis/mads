@@ -20,3 +20,19 @@ class Domain(models.Model):
 
     def __str__(self):
         return self.domain
+
+
+class Alias(models.Model):
+    address = models.CharField(max_length=255, primary_key=True)
+    goto = models.TextField()
+    domain = models.CharField(max_length=255)
+    created = models.DateTimeField(blank=True, null=True)
+    modified = models.DateTimeField(blank=True, null=True)
+    active = models.BooleanField()
+
+    class Meta:
+        db_table = "alias"
+        managed = False
+
+    def __str__(self):
+        return self.address

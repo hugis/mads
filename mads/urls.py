@@ -7,6 +7,7 @@ from mads.apps.core import views
 
 router = routers.DefaultRouter()
 router.register(r"domains", views.DomainViewSet)
+router.register(r"aliases", views.AliasViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

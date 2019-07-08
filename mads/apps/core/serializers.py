@@ -19,3 +19,9 @@ class DomainSerializer(serializers.ModelSerializer):
             "modified",
             "active",
         ]
+
+
+class AliasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Alias
+        fields = ["address", "goto", "domain", "created", "modified", "active"]

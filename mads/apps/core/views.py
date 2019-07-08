@@ -8,3 +8,11 @@ class DomainViewSet(viewsets.ModelViewSet):
 
     queryset = models.Domain.objects.all().order_by("-created")
     serializer_class = serializers.DomainSerializer
+
+
+class AliasViewSet(viewsets.ModelViewSet):
+    """API endpoint that allows aliases to be viewed or edited."""
+
+    queryset = models.Alias.objects.all().order_by("-created")
+    serializer_class = serializers.AliasSerializer
+
