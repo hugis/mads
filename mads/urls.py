@@ -11,7 +11,7 @@ router.register(r"aliases", views.AliasViewSet)
 router.register(r"mailboxes", views.MailboxViewSet)
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path("api/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("admin/", admin.site.urls),
+    path("tagmin/", admin.site.urls),
 ]
