@@ -4,3 +4,4 @@ django-filter==2.1.0
 djangorestframework==3.9.4
 ipython
 psycopg2-binary==2.8.3
+pytz
