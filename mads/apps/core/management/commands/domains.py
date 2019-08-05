@@ -1,12 +1,11 @@
 import csv
 from pathlib import Path
 
-import pytz
 from django.core.management.base import LabelCommand, CommandError
 from django.utils import timezone
-from django.utils.dateparse import parse_datetime
 
 from ... import models
+from ._utils import get_datetime
 
 CURRENT_TZ = timezone.get_current_timezone()
 
@@ -18,11 +17,6 @@ def sort_created(value):
 class Command(LabelCommand):
     help = "Loads domains from the CSV file exported from an old Postfixadmin database."
     label = "file"
-
-    @staticmethod
-    def _get_datetime(value, target_timezone):
-        naive = parse_datetime(value)
-        return pytz.timezone(target_timezone).localize(naive, is_dst=None)
 
     def add_arguments(self, parser):
         super().add_arguments(parser)
@@ -44,21 +38,28 @@ class Command(LabelCommand):
             with open(label) as csvfile:
                 reader = csv.reader(csvfile)
                 for row in reader:
-                    created = self._get_datetime(row[-3], options["timezone"])
-                    updated = self._get_datetime(row[-2], options["timezone"])
+                    created = get_datetime(row[-3], options["timezone"])
+                    modified = get_datetime(row[-2], options["timezone"])
 
-                    data.append([row[0], created, updated, row[-1] == "1"])
+                    #            name,   created, modified, active
+                    data.append([row[0], created, modified, row[-1] == "1"])
 
             # Sort data by created time
             data.sort(key=sort_created)
 
             for row in data:
-                _, created = models.Domain.objects.get_or_create(
+                domain, created = models.Domain.objects.get_or_create(
                     name=row[0],
                     defaults={"created": row[1], "modified": row[2], "active": row[3]},
                 )
 
-                if not created:
+                if created:
+                    # Fix created and modified fields because at creation they are
+                    # always set to ‘now’
+                    domain.created = row[1]
+                    domain.modified = row[2]
+                    domain.save()
+                else:
                     self.stderr.write(f"Domain {row[0]} already exists")
 
         else:
