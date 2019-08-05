@@ -7,6 +7,7 @@ from . import models
 class DomainAdmin(admin.ModelAdmin):
     list_display = ["name", "created", "active"]
     list_filter = ["active"]
+    readonly_fields = ["created", "modified"]
     search_fields = ["name"]
 
 
@@ -14,6 +15,7 @@ class DomainAdmin(admin.ModelAdmin):
 class MailboxAdmin(admin.ModelAdmin):
     list_display = ["email", "created", "active"]
     list_filter = ["active"]
+    readonly_fields = ["created", "modified"]
     autocomplete_fields = ["domain"]
     search_fields = ["email", "domain__name"]
 
@@ -22,5 +24,6 @@ class MailboxAdmin(admin.ModelAdmin):
 class AliasAdmin(admin.ModelAdmin):
     list_display = ["source", "destination", "created", "active"]
     list_filter = ["active"]
+    readonly_fields = ["created", "modified"]
     autocomplete_fields = ["domain"]
     search_fields = ["source", "destination", "domain__name"]
