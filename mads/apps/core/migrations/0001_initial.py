@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
                 (
                     "password",
                     models.CharField(
-                        help_text="The hashed password of the mail account. It is prepended by the hashing algorithm. By default it is {SHA256-CRYPT} encrypted. But you may have legacy users that still use {PLAIN-MD5}. Adding the hashing algorithm allows you to have different kinds of hashes.",
+                        help_text="The hashed password of the mail account. It is prepended by the hashing algorithm. By default it is {SHA256-CRYPT} encrypted. But you may have legacy users that still use {MD5-CRYPT}. Adding the hashing algorithm allows you to have different kinds of hashes.",
                         max_length=150,
                     ),
                 ),
