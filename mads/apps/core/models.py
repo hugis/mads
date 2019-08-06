@@ -1,4 +1,5 @@
 from django.db import models
+from passlib.hash import sha256_crypt
 
 
 class Domain(models.Model):
@@ -44,6 +45,12 @@ class Mailbox(models.Model):
 
     def __str__(self):
         return self.email
+
+    def set_password(self, password: str, commit: bool = True) -> "Mailbox":
+        self.password = f"{{SHA256-CRYPT}}{sha256_crypt.hash(password)}"
+        if commit:
+            self.save()
+        return self
 
 
 class Alias(models.Model):
