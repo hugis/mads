@@ -35,7 +35,7 @@ class Command(LabelCommand):
         )
 
     def handle_label(self, label, **options):
-        filepath = Path(__file__).parent / label
+        filepath = Path.cwd() / label
 
         if filepath.exists():
             data = []

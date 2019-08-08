@@ -34,7 +34,7 @@ class Command(LabelCommand):
         return password if password[0] == "{" else f"{{MD5-CRYPT}}{password}"
 
     def handle_label(self, label, **options):
-        filepath = Path(__file__).parent / label
+        filepath = Path.cwd() / label
 
         if filepath.exists():
             data = []
