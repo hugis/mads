@@ -116,6 +116,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name_plural": "aliases", "db_table": "alias"},
+            options={"verbose_name_plural": "aliases", "db_table": "aliases"},
         ),
     ]

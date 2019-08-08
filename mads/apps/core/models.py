@@ -68,7 +68,7 @@ class Alias(models.Model):
     active = models.BooleanField(default=True)
 
     class Meta:
-        db_table = "alias"
+        db_table = "aliases"
         verbose_name_plural = "aliases"
 
     def __str__(self):
