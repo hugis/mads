@@ -3,6 +3,8 @@ from django.urls import path
 
 from . import admin_views, forms, models
 
+admin.site.site_header = "Mailbox administration"
+
 
 @admin.register(models.Domain)
 class DomainAdmin(admin.ModelAdmin):
