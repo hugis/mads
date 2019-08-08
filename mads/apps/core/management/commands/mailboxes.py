@@ -65,7 +65,13 @@ class Command(LabelCommand):
 
                 mailbox, created = models.Mailbox.objects.get_or_create(
                     email=row[1],
-                    defaults={"domain": domain, "password": row[2], "active": row[5]},
+                    defaults={
+                        "domain": domain,
+                        "password": row[2],
+                        "created": row[3],
+                        "modified": row[4],
+                        "active": row[5],
+                    },
                 )
 
                 if created:

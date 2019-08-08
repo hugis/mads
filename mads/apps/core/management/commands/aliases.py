@@ -70,7 +70,12 @@ class Command(LabelCommand):
                 alias, created = models.Alias.objects.get_or_create(
                     source=row[1],
                     destination=row[2],
-                    defaults={"domain": domain, "active": row[5]},
+                    defaults={
+                        "domain": domain,
+                        "created": row[3],
+                        "modified": row[4],
+                        "active": row[5],
+                    },
                 )
 
                 if created:
