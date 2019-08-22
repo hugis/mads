@@ -20,6 +20,14 @@ class Domain(models.Model):
 
 
 class Mailbox(models.Model):
+    QUOTA_SUFFIX_MEGA = "M"
+    QUOTA_SUFFIX_GIGA = "G"
+    QUOTA_SUFFIX_TERA = "T"
+    QUOTA_SUFFIX_CHOICES = [
+        (QUOTA_SUFFIX_MEGA, "MiB"),
+        (QUOTA_SUFFIX_GIGA, "GiB"),
+        (QUOTA_SUFFIX_TERA, "TiB"),
+    ]
     domain = models.ForeignKey(
         Domain, related_name="mailboxes", on_delete=models.CASCADE
     )
@@ -34,6 +42,15 @@ class Mailbox(models.Model):
             "legacy users that still use {MD5-CRYPT}. Adding the hashing algorithm "
             "allows you to have different kinds of hashes."
         ),
+    )
+    quota = models.IntegerField(
+        default=0, help_text="Quota limit in kilobytes, 0 means unlimited."
+    )
+    quota_suffix = models.CharField(
+        max_length=1,
+        blank=True,
+        choices=QUOTA_SUFFIX_CHOICES,
+        help_text="If suffix is set, it changes quota units.",
     )
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

@@ -16,13 +16,22 @@ class DomainAdmin(admin.ModelAdmin):
 
 @admin.register(models.Mailbox)
 class MailboxAdmin(admin.ModelAdmin):
-    list_display = ["email", "created", "active"]
+    list_display = ["email", "created", "active", "_quota"]
     list_filter = ["active"]
     readonly_fields = ["created", "modified"]
     autocomplete_fields = ["domain"]
     search_fields = ["email", "domain__name"]
     form = forms.MailboxChangeForm
     add_form = forms.MailboxCreationForm
+
+    def _quota(self, obj):
+        if obj.quota == 0:
+            return "∞"
+        else:
+            suffix = obj.get_quota_suffix_display() if obj.quota_suffix else "KiB"
+            return f"{obj.quota} {suffix}"
+
+    _quota.short_description = "Quota"
 
     def get_urls(self):
         return [

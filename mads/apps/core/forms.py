@@ -25,7 +25,7 @@ class MailboxCreationForm(forms.ModelForm):
 
     class Meta:
         model = models.Mailbox
-        fields = ["domain", "email", "active"]
+        fields = ["domain", "email", "active", "quota", "quota_suffix"]
 
     def clean_email(self):
         # Since Mailbox.email is unique, this check is redundant,
