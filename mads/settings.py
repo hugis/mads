@@ -104,6 +104,21 @@ USE_L10N = True
 USE_TZ = True
 
 
+# MAIL SETTINGS
+# ------------------------------------------------------------------------------
+EMAIL_HOST = env("DJANGO_EMAIL_HOST", default="localhost")
+
+EMAIL_PORT = env.int("DJANGO_EMAIL_PORT", default=25)
+
+EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default="[Django] ")
+
+EMAIL_USE_LOCALTIME = True
+
+DEFAULT_FROM_EMAIL = env("DJANGO_DEFAULT_FROM_EMAIL", default="webmaster@localhost")
+
+SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default="root@localhost")
+
+
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
